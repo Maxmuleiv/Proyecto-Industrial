@@ -1,45 +1,12 @@
 ---
-title: Análisis Pobreza Multidimensional
+title: An R Markdown document converted from "AnalisisPobrezaMultidimensional.ipynb"
 output: html_document
 ---
 
 ```{r}
-# Este Notebook se generó siguiendo
-# https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html
-# Ejecutando
-# nb_rmd = rmarkdown:::convert_ipynb(nb_file)
-# donde nb_file <- "AnalisisPobrezaMultidimensional.ipynb"
-library(reticulate)
-# Use other python
-# use_python("/home/sebastian/.pyenv/shims/python")
-# Check python config
-# py_config()
-# Command line python
-# repl_python()
-# Verify conda environments
-# conda_list()
-# indicate that we want to use a specific condaenv
-# use_condaenv("r-reticulate")
-# Install package in default conda environment "r-reticulate"
-# py_install("pandas")
-# py_install("time")
-# py_install("matplotlib")
-# py_install("seaborn") 
-# py_install("networkx")
-# py_install("scipy")
-# Unable to install the following
-# py_install("math")
-# Install package in specific environment "environment-name"
-# virtualenv_install("environment-name", "scipy")
-# Problem: 
-# QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-sebastian'
-# No protocol specified
-# qt.qpa.screen: QXcbConnection: Could not connect to display :0
-# Could not connect to any X display.
-# Solution found on https://community.rstudio.com/t/how-to-display-the-plot-in-the-python-chunk/22039/2
-matplotlib <- import("matplotlib")
-matplotlib$use("Agg", force = TRUE)
+source("reticulate_config.R")
 ```
+
 
 <a href="https://colab.research.google.com/github/Maxmuleiv/Proyecto-Industrial/blob/master/AnalisisPobrezaMultidimensional.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
@@ -54,7 +21,6 @@ import seaborn as sb
 import networkx as nx
 from scipy.stats import pointbiserialr
 from math import pi
-!pip install squarify #pip install squarify #(algorithm for treemap)
 import squarify
 from matplotlib_venn import venn3
 import matplotlib.patches as mpatches
@@ -73,11 +39,10 @@ url4="data_local/CASEN45.csv"
 casen = pd.read_csv(url4,";", encoding='iso-8859-1') #importación base datos para calculo tipo hogares y tipologias de las carencias
 ```
 
-```{python eval=FALSE, include=FALSE}
-url3="https://github.com/Maxmuleiv/Proyecto-Industrial/blob/master/CASENtipologias.csv?raw=true" #url base datos 
-casen = pd.read_csv(url3,";", encoding='iso-8859-1') #importación base datos para calculo tipo hogares y tipologias de las carencias
+```{python}
+#url3="https://github.com/Maxmuleiv/Proyecto-Industrial/blob/master/CASENtipologias.csv?raw=true" #url base datos 
+#casen = pd.read_csv(url3,";", encoding='iso-8859-1') #importación base datos para calculo tipo hogares y tipologias de las carencias
 ```
-
 
 #3- Categorizacion por tipo de familia
 
@@ -158,9 +123,7 @@ def creacion_heatmap(Nombre_metodo,Tabla_variables,Negativos,Comentario_grafico)
   Tabla_correlaciones.to_excel(excel_writer = Comentario_grafico+"correlaciones.xlsx")
   return
   plt.show()
-```
 
-````{python}
 # set carencias y set dimensiones
 jjj=["Asistencia","Rezago escolar","Escolaridad","Malnutricion infantil","Sistema de salud","Atencion","Ocupacion","Seguridad social","Jubilaciones","Habitabilidad","Servicios basicos","Entorno","Apoyo y participacion social","Trato igualitario","Seguridad"]
 hhh=["Educacion","Salud","Trabajo y seguridad social","Vivienda y entorno","Redes y cohesion social"]
@@ -181,12 +144,7 @@ print(len(casen.index))
 ```
 
 ```{python}
-<<<<<<< HEAD
-creacion_heatmap("pearson",casen_hogares,True,"Correlaciones")
-plt.show()
-=======
 creacion_heatmap("pearson",casen_hogares,True,"carencias 1")
->>>>>>> 916f05ee40446de4145abcd4316e8c90a4da6e48
 ```
 
 ```{python}
@@ -241,8 +199,6 @@ casen_numper['numper'].value_counts(normalize=True)
 ```
 
 ```{python}
-casen_n1 = casen_n1.drop(['numper'],axis=1)
-
 # numper = 1
 casen_n1=casen_numper[casen_numper.numper == 1]
 casen_n1 = casen_n1.drop(['numper'],axis=1)
@@ -345,6 +301,10 @@ creacion_heatmap("pearson",hogar_binuc,True,"car_binuc")
 creacion_heatmap("pearson",hogar_monoex,True,"car_monoex")
 creacion_heatmap("pearson",hogar_biex,True,"car_biex")
 creacion_heatmap("pearson",hogar_cen,True,"car_censal")
+```
+
+```{python}
+casen.head()
 ```
 
 ```{python}
