@@ -22,7 +22,8 @@ library(reticulate)
 # py_install("seaborn") 
 # py_install("networkx")
 # py_install("scipy")
-py_install("squarify")
+# py_install("squarify") #(algorithm for treemap)
+# py_install("matplotlib-venn")
 # Unable to install the following
 # py_install("math")
 # Install package in specific environment "environment-name"
